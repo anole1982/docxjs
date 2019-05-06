@@ -1,6 +1,8 @@
 import { Document } from './document';
-import { IDomStyle, IDomDocument, DomType, IDomTable, IDomStyleValues, IDomNumbering, IDomRun, 
-    IDomHyperlink, IDomParagraph, IDomImage, IDomElement, IDomTableColumn, IDomTableCell } from './dom';
+import {
+    IDomStyle, IDomDocument, DomType, IDomTable, IDomStyleValues, IDomNumbering, IDomRun,
+    IDomHyperlink, IDomParagraph, IDomImage, IDomChart, IDomElement, IDomTableColumn, IDomTableCell
+} from './dom';
 
 export class HtmlRenderer {
 
@@ -281,6 +283,9 @@ export class HtmlRenderer {
 
             case DomType.Image:
                 return this.renderImage(elem);
+
+            case DomType.Chart:
+                return this.renderChart(elem);
         }
 
         return null;
@@ -350,7 +355,10 @@ export class HtmlRenderer {
 
         return result;
     }
-
+    renderChart(elem: IDomChart){
+        let result = this.htmlDocument.createElement("canvas");
+        return result;
+    }
     renderRun(elem: IDomRun) {
         if (elem.break)
             return this.htmlDocument.createElement(elem.break == "page" ? "hr" : "br");

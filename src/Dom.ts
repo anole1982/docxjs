@@ -8,7 +8,8 @@ export enum DomType {
     Cell,
     Hyperlink,
     Drawing,
-    Image
+    Image,
+    Chart
 }
 
 export enum DomRelationshipType {
@@ -79,7 +80,9 @@ export interface IDomDocument extends IDomElement {
 export interface IDomImage extends IDomDocument {
     src: string;
 }
+export interface IDomChart extends IDomDocument {
 
+}
 export interface IDomTableColumn {
     width?: string;
 }

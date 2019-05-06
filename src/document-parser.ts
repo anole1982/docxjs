@@ -1,6 +1,25 @@
-import { IDomStyle, IDomDocument, DomType, IDomTable, IDomStyleValues, IDomNumbering, IDomRun, 
-    IDomHyperlink, IDomParagraph, IDomImage, IDomElement, IDomTableColumn, IDomTableCell,
-    IDomRelationship, IDomSubStyle, IDomTableRow, NumberingPicBullet, DocxTab, DomRelationshipType } from './dom';
+import {
+    DocxTab,
+    DomRelationshipType,
+    DomType,
+    IDomChart,
+    IDomDocument,
+    IDomElement,
+    IDomHyperlink,
+    IDomImage,
+    IDomNumbering,
+    IDomParagraph,
+    IDomRelationship,
+    IDomRun,
+    IDomStyle,
+    IDomStyleValues,
+    IDomSubStyle,
+    IDomTable,
+    IDomTableCell,
+    IDomTableColumn,
+    IDomTableRow,
+    NumberingPicBullet
+} from './dom';
 
 export var autos = {
     shd: "white",
@@ -589,10 +608,18 @@ export class DocumentParser {
             switch (n.localName) {
                 case "pic":
                     return this.parsePicture(n);
+                    break;
+                case "chart":
+                    return this.parseChart(n);
             }
         }
 
         return null;
+    }
+
+    parseChart(elem: Element){
+        var result =<IDomChart> {domType:DomType.Chart,option:"",style:{}};
+        return result;
     }
 
     parsePicture(elem: Element): IDomImage {

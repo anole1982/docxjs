@@ -1,25 +1,38 @@
+
 <html>
 <head>
     <script src="https://unpkg.com/promise-polyfill/dist/polyfill.min.js"></script>
     <script src="https://unpkg.com/jszip/dist/jszip.min.js"></script>
     <script src="dist/docx-preview.js"></script>
+    <style media="print">
+        .noprint   {   display:   none;}
+        .pagenext   {   page-break-after:   always   }
+        .doc,.docx-wrapper {
+            DISPLAY:   none;
+        }
+
+        section.docx {
+            display: block;
+        }
+    </style>
 </head>
 <body>
-	<input id="files" type="file" id="files" accept=".docx"/>    <button id="loadButton">load</button>
-    <div id="doc">
-    </div>
+<div class="bar noprint">
+    <input id="files" type="file" id="files" accept=".docx"/>
+    <button id="loadButton">load</button>
+</div>
+<div id="doc">
+</div>
 
-    <script>
+<script>
 
-        document.getElementById("loadButton").addEventListener("click", loadDocx);
+    document.getElementById("loadButton").addEventListener("click", loadDocx);
 
-        function loadDocx() {
-            var file = document.getElementById("files").files[0];
-            var container = document.getElementById("doc");
-            
-            docx.renderAsync(file, container, null, { debug: true })
-                    .then(function(x){ console.log(x); });
-        }
-    </script>
+    function loadDocx() {
+        var file = document.getElementById("files").files[0];
+        var container = document.getElementById("doc");
+        docx.renderAsync(file, container, null, { debug: true }).then(function(x){ console.log(x); });
+    }
+</script>
 </body>
 </html>
