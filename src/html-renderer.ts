@@ -357,6 +357,11 @@ export class HtmlRenderer {
     }
     renderChart(elem: IDomChart){
         let result = this.htmlDocument.createElement("canvas");
+        if (this.document) {
+            this.document.loadDocumentChart(elem.src).then(x => {
+                console.log(x);
+            });
+        }
         return result;
     }
     renderRun(elem: IDomRun) {

@@ -39,6 +39,10 @@ export class Document {
         });
     }
 
+    loadDocumentChart(id: string): PromiseLike<string> {
+        return this.loadResource(this.docRelations, id, "string").then(x => x ? x : null);
+    }
+
     loadDocumentImage(id: string): PromiseLike<string> {
         return this.loadResource(this.docRelations, id).then(x => x ? ("data:image/png;base64," + x) : null);
     }
@@ -52,10 +56,9 @@ export class Document {
             .then(x => x ? ("data:application/vnd.ms-package.obfuscated-opentype;charset=utf-8;base64," + x) : null);
     }
 
-    private loadResource(relations: IDomRelationship[], id: string) {
+    private loadResource(relations: IDomRelationship[], id: string,type?: Serialization) {
         let rel = relations.filter(x => x.id == id);
-
-        return rel.length == 0 ? Promise.resolve(null) : this.zip.files["word/" + rel[0].target].async("base64");
+        return rel.length == 0 ? Promise.resolve(null) : this.zip.files["word/" + rel[0].target].async(type||"base64");
     }
 
     private loadPart(part: PartType, parser: DocumentParser) {

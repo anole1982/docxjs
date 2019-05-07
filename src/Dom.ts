@@ -11,7 +11,11 @@ export enum DomType {
     Image,
     Chart
 }
-
+export enum ChartType {
+    Pie,
+    Bar,
+    Line
+}
 export enum DomRelationshipType {
     Settings,
     Theme,
@@ -81,7 +85,7 @@ export interface IDomImage extends IDomDocument {
     src: string;
 }
 export interface IDomChart extends IDomDocument {
-
+    src: string;
 }
 export interface IDomTableColumn {
     width?: string;

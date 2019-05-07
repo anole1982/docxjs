@@ -618,7 +618,8 @@ export class DocumentParser {
     }
 
     parseChart(elem: Element){
-        var result =<IDomChart> {domType:DomType.Chart,option:"",style:{}};
+        var result =<IDomChart> {domType:DomType.Chart,src:"",style:{}};
+        result.src = xml.stringAttr(elem, "id");
         return result;
     }
 
